@@ -1,0 +1,41 @@
+from tkinter import *
+import pyperclip
+import random
+from PIL import Image
+
+root = Tk()
+root.title('gerador de senhas')
+root.geometry('300x180')
+root.resizable(False, False)
+root.attributes('-alpha', 0.9)
+passstr = StringVar()
+passlen = IntVar()
+passlen.set(0)
+
+
+def generate():
+    pass1 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k',
+             'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+             'v', 'x', 'y', 'w', 'z', 'A', 'B', 'C', 'D', 'E',
+             'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P',
+             'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'W', 'Z',
+             '!', '@', '#', '$', '%', '&', '(', ')', '1', '2',
+             '3', '4', '5', '6', '7', '8', '9', '0']
+    password = ""
+    for x in range(passlen.get()):
+        password = password + random.choice(pass1)
+    passstr.set(password)
+
+
+def copytoclipboard():
+    random_password = passstr.get()
+    pyperclip.copy(random_password)
+
+imgLogo = PhotoImage(file='C:\\Users\\MANO\\Desktop\\GERENCIADOR-DE-SENHAS-GERENCIADOR-DE-SENHAS\\bandeira.png')
+logo_label = Label(root, image=imgLogo,width=300, height=180).place(y=1, x=1)
+Label(root, text='definir senha', font='Arial 10 bold').place(y=80, x=5)
+Entry(root, textvariable=passlen).place(x=5, y=119)
+Button(root, text='gerar senha', bg='gray', command=generate).place(y=115, x=155)
+Entry(root, textvariable=passstr).place(x=5, y=155)
+Button(root, text='Copiar Senha', bg='gray', command=copytoclipboard).place(y=150, x=155)
+root.mainloop()
